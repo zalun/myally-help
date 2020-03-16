@@ -1,24 +1,28 @@
 # My Ally
 ## Therapy help in the time of trouble
 
+Display an immediate online contact to available therapists.
+
 
 ## Development
 Free help for people in group trauma.
 Epidemy, natural disasters etc.
 
-A website with a list of active therapists.
-A therapist is displayed as a name / info / links to contacts
+A website with a list of active Therapists.
+A Therapist is displayed as a name / info / links to contacts
 There is an info of the number of therapists currently on-line, to make people aware that they might wait a moment for the next therapist.
 
 Admin should be aware of number of people seeking contact.
 
 Website should use a sophisticated mechanism to actively update the information to avoid double-booking.
 
-To register one needs to be authorised by an admin in the country.
+To register one needs to be invited by coordinator in the country.
+There might be many Coordinators per Country.
+
 Login with e-mail/password.
 
-Database:
-----------------
+### Database:
+
 Cause
  - name
  - countries (one to many)
@@ -31,14 +35,25 @@ Country
 Language
 - name
 
-Therapist
+Profile
   - first name
-  - last name
-  - cause (one to many)
-  - country (one to many)
+  - last name 
+
+Coordinator
+  - link to Profile
+  - link to Country
+  
+Invitation
+  - link to Coordinator
+  - code
+  - country
+
+Therapist
+  - link to Profile (one to one)
+  - link to Cause (one to many)
+  - link to Country (one to many)
   - specialisation
   - languages
-  - short bio
   - on-line (bool)
   - busy (bool)
   - contacts:
