@@ -1,0 +1,3 @@
+hashin==0.14.6 \
+    --hash=sha256:2a8a8f8087fef63ddcddf6cc2f8c31594a8c125266de4427217c0502ddb2ab57 \
+    --hash=sha256:45f54dc7707738566d05fdb49a8be2af6884fd6d1febc330dd195ab68a477a93
