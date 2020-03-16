@@ -3,8 +3,7 @@
 Availability to get to therapists in Poland.
 One `Coordinator` added by an admin.
 
- - `Coordinator` sends an invite to a `Therapist`.
- - `Therapist` confirms the `Invite`.
+ - `Admin` creates a `Therapist` account.
  - `Therapist` is filling the details on the `ProfilePage`.
  - `Therapist` has a private `ProfilePage`.
  - `Therapist` can set the `on-line` status.

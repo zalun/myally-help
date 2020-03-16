@@ -3,8 +3,8 @@
 
 Display an immediate online contact to available therapists.
 
+## Info
 
-## Development
 Free help for people in group trauma.
 Epidemy, natural disasters etc.
 
@@ -21,16 +21,18 @@ There might be many Coordinators per Country.
 
 Login with e-mail/password.
 
+## Development
 ### Database:
 
 Cause
  - name
- - countries (one to many)
+ - countries (many to many)
  - description
  - website
 
 Country
- - name
+*using `django-countries`*
+https://pypi.org/project/django-countries/
  
 Language
 - name
