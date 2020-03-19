@@ -5,4 +5,7 @@ class Cause(models.Model):
     name = models.CharField(max_length=200) 
     description = models.TextField()
     countries = CountryField(multiple=True)
-    website = models.URLField()
+    website = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
