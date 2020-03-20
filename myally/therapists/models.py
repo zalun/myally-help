@@ -4,9 +4,16 @@ from django_countries.fields import CountryField
 
 from causes.models import Cause
 
+
 class Therapist(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    causes = models.ForeignKey(Cause, related_name="therapists", null=True, blank=True, on_delete=models.SET_NULL)
+    causes = models.ForeignKey(
+        Cause,
+        related_name="therapists",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     countries = CountryField(multiple=True)
     specialisation = models.CharField(max_length=200)
     online = models.BooleanField(blank=True, default=False)

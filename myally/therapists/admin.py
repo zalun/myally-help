@@ -8,11 +8,12 @@ from .models import Therapist
 class TherapistInline(admin.StackedInline):
     model = Therapist
     can_delete = False
-    verbose_name_plural = 'Therapist'
-    fk_name = 'user'
+    verbose_name_plural = "Therapist"
+    fk_name = "user"
+
 
 class TherapistAdmin(UserAdmin):
-    inlines = (TherapistInline, )
+    inlines = (TherapistInline,)
 
     def get_inline_instances(self, request, obj=None):
         if not obj:

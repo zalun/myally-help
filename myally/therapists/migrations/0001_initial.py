@@ -11,25 +11,53 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('causes', '0001_initial'),
+        ("causes", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Therapist',
+            name="Therapist",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('countries', django_countries.fields.CountryField(max_length=746, multiple=True)),
-                ('specialisation', models.CharField(max_length=200)),
-                ('online', models.BooleanField(blank=True, default=False)),
-                ('busy', models.BooleanField(blank=True, default=False)),
-                ('phone_number', models.CharField(blank=True, max_length=200, null=True)),
-                ('whatsapp', models.BooleanField(blank=True, default=False)),
-                ('skype_id', models.CharField(max_length=200)),
-                ('messenger_id', models.CharField(max_length=200)),
-                ('causes', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='causes.Cause')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "countries",
+                    django_countries.fields.CountryField(max_length=746, multiple=True),
+                ),
+                ("specialisation", models.CharField(max_length=200)),
+                ("online", models.BooleanField(blank=True, default=False)),
+                ("busy", models.BooleanField(blank=True, default=False)),
+                (
+                    "phone_number",
+                    models.CharField(blank=True, max_length=200, null=True),
+                ),
+                ("whatsapp", models.BooleanField(blank=True, default=False)),
+                ("skype_id", models.CharField(max_length=200)),
+                ("messenger_id", models.CharField(max_length=200)),
+                (
+                    "causes",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="causes.Cause",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

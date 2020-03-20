@@ -1,0 +1,27 @@
+{% extends "generic.html" %}
+{% load social_links %}
+{% block header_title %}{{ cause.name|title }}{% endblock %}
+{% block content %}
+<div class="description">{{ cause.description }}</div>
+    <ul class="therapists"> 
+    {% for therapist in therapists %}
+    <li class="{% if therapist.busy %}busy{% else %}active{% endif %}">
+        <span class="name">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</span>
+        / <span class="specialisation">{{ therapist.specialisation }}</span>
+        {% if therapist.phone_number %}
+        / <a class="phone" href="tel:{{ therapist.phone_number }}">{{ therapist.phone_number }}</a>
+        {% if therapist.whatsapp %}
+        / <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp</a>
+        / <a class="whatsapp" href="https://api.whatsapp.com/send?phone={{ therapist.phone_number|whatsapp }}">WhatsApp</a>
+        {% endif %}
+        {% endif %}
+        {% if therapist.messenger_id %}
+        / <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger</a>
+        {% endif %}
+        {% if therapist.skype_id %}
+        / <a class="messenger" href="skype:{{ therapist.skype_id }}?call">Skype</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

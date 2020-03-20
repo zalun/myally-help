@@ -8,18 +8,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Cause',
+            name="Cause",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('description', models.TextField()),
-                ('countries', django_countries.fields.CountryField(max_length=746, multiple=True)),
-                ('website', models.URLField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("description", models.TextField()),
+                (
+                    "countries",
+                    django_countries.fields.CountryField(max_length=746, multiple=True),
+                ),
+                ("website", models.URLField()),
             ],
         ),
     ]

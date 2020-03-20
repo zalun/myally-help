@@ -7,5 +7,7 @@ from therapists.models import Therapist
 
 def index(request, cause_name):
     cause = Cause.objects.get(name=cause_name)
-    therapists = [str(t) for t in cause.therapists.all()]
-    return HttpResponse("<br/>".join(therapists))
+    therapists = cause.therapists.filter(online=True)
+    return render(
+        request, "therapists.html", context=dict(cause=cause, therapists=therapists)
+    )
