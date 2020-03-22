@@ -4,33 +4,34 @@
 {% block header_title %}{{ cause.name|title }}{% endblock %}
 {% block content %}
 <p class="description">{{ cause.description }}</p>
-<p><button class="btn btn-light btn-block" id="reload_button">Przeładuj</button></p>
     <ul class="therapists list-group-flush"> 
-    {% for therapist in therapists %}
-    <li class="{% if therapist.busy %}disabled{% else %}{% endif %} list-group-item">
-        <span class="name">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</span>
-        / <span class="specialisation">{{ therapist.specialisation }}</span>
-        {% if therapist.phone_number %}
-        / <a class="phone" href="tel:{{ therapist.phone_number }}">{{ therapist.phone_number }}</a>
-        {% if therapist.whatsapp %}
-        / <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp</a>
-        / <a class="whatsapp" href="https://api.whatsapp.com/send?phone={{ therapist.phone_number|whatsapp }}">WhatsApp</a>
-        {% endif %}
-        {% endif %}
-        {% if therapist.messenger_id %}
-        / <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger</a>
-        {% endif %}
-        {% if therapist.skype_id %}
-        / <a class="messenger" href="skype:{{ therapist.skype_id }}?call">Skype</a>
-        {% endif %}
-    </li>
-    {% endfor %}
+        <li class="list-group-item"><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></li>
+        {% for therapist in therapists %}
+        <li class="{% if therapist.busy %}disabled{% else %}{% endif %} list-group-item">
+            <span class="name">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</span>
+            / 
+            <span class="specialisation">{{ therapist.specialisation_str }}</span>
+            {% if therapist.phone_number %}
+            / <a class="phone" href="tel:{{ therapist.phone_number }}">{{ therapist.phone_number }}</a>
+            {% if therapist.whatsapp %}
+            / <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp</a>
+            / <a class="whatsapp" href="https://api.whatsapp.com/send?phone={{ therapist.phone_number|whatsapp }}">WhatsApp</a>
+            {% endif %}
+            {% endif %}
+            {% if therapist.messenger_id %}
+            / <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger</a>
+            {% endif %}
+            {% if therapist.skype_id %}
+            / <a class="messenger" href="skype:{{ therapist.skype_id }}?call">Skype</a>
+            {% endif %}
+        </li>
+        {% endfor %}
     </ul>
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById("reload_button").onclick = function() {
-                Location.reload();
-            }
+            $('#reload_button').click(function() {
+                location.reload();
+            });
         })
     </script>
 {% endblock %}

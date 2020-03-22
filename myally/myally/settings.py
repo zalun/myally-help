@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sites",
     "django_countries",
+    # MyAlly apps
+    "causes",
+    "therapists",
     # Third party
     "crispy_forms",
     "allauth",
@@ -47,9 +50,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     #'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.google',
-    # MyAlly apps
-    "causes",
-    "therapists",
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
