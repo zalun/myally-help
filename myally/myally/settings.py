@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sites",
     "django_countries",
+    # Third party
+    "crispy_forms",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -50,8 +52,16 @@ INSTALLED_APPS = [
     "therapists",
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 SITE_ID = 1
 
+# All Auth
+ACCOUNT_ADAPTER = 'myally.account_adapter.NoNewUsersAccountAdapter'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = ("email")
+LOGIN_REDIRECT_URL = "/therapist/profile"
+SOCIALACCOUNT_AUTO_SIGNUP = False
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

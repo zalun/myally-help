@@ -6,16 +6,20 @@ from causes.models import Cause
 
 
 class Therapist(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    causes = models.ForeignKey(
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        related_name="therapist",
+    )
+    causes = models.ManyToManyField(
         Cause,
         related_name="therapists",
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
     )
     countries = CountryField(multiple=True)
     specialisation = models.CharField(max_length=200)
+    active = models.BooleanField(blank=True, default=True)
     online = models.BooleanField(blank=True, default=False)
     busy = models.BooleanField(blank=True, default=False)
     # contacts
@@ -24,6 +28,8 @@ class Therapist(models.Model):
     skype_id = models.CharField(max_length=200, blank=True, null=True)
     messenger_id = models.CharField(max_length=200, blank=True, null=True)
 
+    class Meta:
+        ordering = ("busy",)
     def __str__(self):
         return "{user} / {specialisation}".format(
             user=str(self.user), specialisation=self.specialisation

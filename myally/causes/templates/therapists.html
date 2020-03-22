@@ -1,11 +1,13 @@
 {% extends "generic.html" %}
 {% load social_links %}
+{% block title %}{{ cause.name|title }} - darmowa pomoc terapeutyczna{% endblock %}
 {% block header_title %}{{ cause.name|title }}{% endblock %}
 {% block content %}
-<div class="description">{{ cause.description }}</div>
-    <ul class="therapists"> 
+<p class="description">{{ cause.description }}</p>
+<p><button class="btn btn-light btn-block" id="reload_button">Przeładuj</button></p>
+    <ul class="therapists list-group-flush"> 
     {% for therapist in therapists %}
-    <li class="{% if therapist.busy %}busy{% else %}active{% endif %}">
+    <li class="{% if therapist.busy %}disabled{% else %}{% endif %} list-group-item">
         <span class="name">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</span>
         / <span class="specialisation">{{ therapist.specialisation }}</span>
         {% if therapist.phone_number %}
@@ -24,4 +26,11 @@
     </li>
     {% endfor %}
     </ul>
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById("reload_button").onclick = function() {
+                Location.reload();
+            }
+        })
+    </script>
 {% endblock %}
