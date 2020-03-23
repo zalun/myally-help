@@ -26,7 +26,7 @@ SECRET_KEY = ")+dvldm^(6nrb2q4q(@27!6y)8tet^(ndmt$%p5_o=uhy(w*b^"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.ALLOWED_HOSTS if env.ALLOWED_HOSTS else []
 
 
 # Application definition
