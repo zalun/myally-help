@@ -6,22 +6,22 @@
 {% block content %}
 <p class="description">{{ cause.description }}</p>
 <p>Ogólna liczba terapeutów: {{ count_all }}, online: {{ count_online }}, dostępni {{ count_available }}</p>
-{% if no_therapists %}<p>Brak terapeutów w tym zadaniu</p>{% endif %}
-{% if no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>{% endif %}
-{% if no_therapists_available %}<p>Przykro nam. Wszyscy terapeuci rozmawiają. Niedługo ktoś zakończy rozmowę. Odświeżaj stronę co kilka minut.<p>{% endif %}
+{% if no_therapists %}<p>Brak terapeutów w tym zadaniu</p>
+{% elif no_therapists_available %}<p>Przykro nam. Wszyscy terapeuci rozmawiają. Niedługo ktoś zakończy rozmowę. Odświeżaj stronę co kilka minut.<p>
+{% elif no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>{% endif %}
     <ul class="therapists list-group-flush"> 
         <li class="list-group-item"><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></li>
         {% for therapist in therapists %}
         <li class="{% if therapist.busy %}disabled{% else %}{% endif %} list-group-item">
+            {% if therapist.busy %}<span class="hidden therapist-busy">rozmawia</span>{% endif %}
             <span class="name">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</span>
             / 
             <span class="specialisation">{{ therapist.specialisation_str }}</span>
             {% if therapist.phone_number %}
             / <a class="phone" href="tel:{{ therapist.phone_number }}">{{ therapist.phone_number }}</a>
-            {% if therapist.whatsapp %}
-            / <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp</a>
-            / <a class="whatsapp" href="https://api.whatsapp.com/send?phone={{ therapist.phone_number|whatsapp }}">WhatsApp</a>
-            {% endif %}
+                {% if therapist.whatsapp %}
+                / <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp</a>
+                {% endif %}
             {% endif %}
             {% if therapist.messenger_id %}
             / <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger</a>
