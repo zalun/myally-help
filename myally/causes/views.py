@@ -19,6 +19,9 @@ def index(request, cause_name):
             therapists=therapists,
             count_online=count_online,
             count_available=count_available,
-            count_all=count_all
+            count_all=count_all,
+            no_therapists=count_all == 0,
+            no_therapists_online=count_online == 0,
+            no_therapists_available=count_available == 0
         )
     )

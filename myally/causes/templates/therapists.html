@@ -5,7 +5,10 @@
 {% block header_title %}{{ cause.name|title }}{% endblock %}
 {% block content %}
 <p class="description">{{ cause.description }}</p>
-<p>Ogólna liczba terapeutów: {{ count_all }}, online: {{ count_online }}, dostępni {{ count_available }}
+<p>Ogólna liczba terapeutów: {{ count_all }}, online: {{ count_online }}, dostępni {{ count_available }}</p>
+{% if no_therapists %}<p>Brak terapeutów w tym zadaniu</p>{% endif %}
+{% if no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>{% endif %}
+{% if no_therapists_available %}<p>Przykro nam. Wszyscy terapeuci rozmawiają. Niedługo ktoś zakończy rozmowę. Odświeżaj stronę co kilka minut.<p>{% endif %}
     <ul class="therapists list-group-flush"> 
         <li class="list-group-item"><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></li>
         {% for therapist in therapists %}
