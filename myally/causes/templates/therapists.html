@@ -5,6 +5,7 @@
 {% block header_title %}{{ cause.name|title }}{% endblock %}
 {% block content %}
 <p class="description">{{ cause.description }}</p>
+<p>Ogólna liczba terapeutów: {{ count_all }}, online: {{ count_online }}, dostępni {{ count_available }}
     <ul class="therapists list-group-flush"> 
         <li class="list-group-item"><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></li>
         {% for therapist in therapists %}

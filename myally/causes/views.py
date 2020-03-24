@@ -9,7 +9,7 @@ def index(request, cause_name):
     cause = get_object_or_404(Cause, name=cause_name)
     therapists = cause.therapists.filter(online=True)
     count_online = therapists.count()
-    count_busy = therapists.filter(busy=True)
+    count_available = therapists.filter(busy=False).count()
     count_all = cause.therapists.count()
     return render(
         request, 
@@ -18,7 +18,7 @@ def index(request, cause_name):
             cause=cause, 
             therapists=therapists,
             count_online=count_online,
-            count_busy=count_busy,
+            count_available=count_available,
             count_all=count_all
         )
     )
