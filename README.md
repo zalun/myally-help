@@ -80,3 +80,18 @@ Logging
  - switch availability
  - switch busy
 
+
+## Deployment
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04
+
+Create a `myally/security.py` file with the content:
+
+```
+DEBUG = True
+POSTGRESQL_HOST = "somehost"
+POSTGRESQL_DATABASE = "somedb"
+POSTGRESQL_USER = "someuser"
+POSTGRESQL_PASSWORD = "somepassword"
+ALLOWED_HOSTS = ["myally.pl"]
+STATIC_ROOT = "/path/to/static"
+````

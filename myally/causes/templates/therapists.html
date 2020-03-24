@@ -1,6 +1,7 @@
 {% extends "generic.html" %}
 {% load social_links %}
 {% block title %}{{ cause.name|title }} - darmowa pomoc terapeutyczna{% endblock %}
+{% block head %} <link rel="stylesheet" href="/static/causes/css/therapists.css">{% endblock %}
 {% block header_title %}{{ cause.name|title }}{% endblock %}
 {% block content %}
 <p class="description">{{ cause.description }}</p>
@@ -27,11 +28,5 @@
         </li>
         {% endfor %}
     </ul>
-    <script type="text/javascript">
-        window.addEventListener('DOMContentLoaded', (event) => {
-            $('#reload_button').click(function() {
-                location.reload();
-            });
-        })
-    </script>
+    <script src="/static/causes/js/therapists.js"></script>
 {% endblock %}
