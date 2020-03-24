@@ -153,5 +153,5 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 if env.STATIC_ROOT:
-    STATIC_ROOT = env.STATIC_ROOT
+    STATIC_ROOT = os.path.join(env.STATIC_ROOT, "static")
     STATICFILES_DIRS = [STATIC_ROOT]
