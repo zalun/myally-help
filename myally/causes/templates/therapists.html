@@ -1,10 +1,13 @@
 {% extends "generic.html" %}
 {% load social_links %}
-{% block title %}{{ cause.name|title }} - darmowa pomoc terapeutyczna{% endblock %}
+{% block title %}my allay - bezpłatna pomoc psychologiczna - {{ cause.name|title }}{% endblock %}
 {% block head %} <link rel="stylesheet" href="/static/causes/css/therapists.css">{% endblock %}
-{% block header_title %}{{ cause.name|title }}{% endblock %}
+{% block header_title %}Pomoc - {{ cause.name }}{% endblock %}
 {% block content %}
-<p class="description">{{ cause.description }}</p>
+<p class="description">
+    Bezpłatna pomoc psychologiczna<br>
+    {{ cause.description }}
+</p>
 <p>Ogólna liczba terapeutów: {{ count_all }}, online: {{ count_online }}, dostępni {{ count_available }}</p>
 {% if no_therapists %}<p>Brak terapeutów w tym zadaniu</p>
 {% elif no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>
