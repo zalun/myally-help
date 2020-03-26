@@ -43,13 +43,13 @@ class Therapist(models.Model):
     def specialisation_str(self):
         specs = []
         if self.psychologist:
-            specs.append(_("psychologist"))
+            specs.append(_("psycholog"))
 
         if self.psychotherapist:
-            specs.append(_("psychotherapist"))
+            specs.append(_("psychoterapeuta"))
 
         if self.therapist:
-            specs.append(_("psychotherapist"))
+            specs.append(_("terapeuta"))
 
         specs.append(_(self.specialisation))
         return ", ".join(specs)
