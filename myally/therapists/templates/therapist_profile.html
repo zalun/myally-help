@@ -9,5 +9,12 @@
     aktywne kampanie: {{ causes }}
 </p>
 <hr class="mt-0 mb-4">
-{% crispy form %}
+<div class="row">
+    <div class="col-sm">
+        {% crispy form_activity %}
+    </div>
+    <div class="col-sm">
+        {% crispy form %}
+    </div>
+</div>
 {% endblock %}
