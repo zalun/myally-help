@@ -19,7 +19,7 @@
                 <td colspan=5><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></td>
             </tr>
             {% for therapist in therapists %}
-            <tr{% if therapist.busy %} class="disabled" data-toggle="tooltip" data-placement="bottom"  title="zajęty"{% endif %}>
+            <tr{% if therapist.busy %} class="disabled" data-toggle="tooltip" data-placement="bottom"  title="rozmawia"{% endif %}>
                 <td class="text-right">
                     <ul class="nav">
                         {% if therapist.phone_number %}
