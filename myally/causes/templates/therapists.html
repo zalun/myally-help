@@ -13,28 +13,44 @@
 {% elif no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>
 {% elif no_therapists_available %}<p>Niedługo ktoś zakończy rozmowę. Odświeżaj stronę co kilka minut.<p>
 {% endif %}
-    <ul class="therapists list-group-flush"> 
-        <li class="list-group-item"><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></li>
-        {% for therapist in therapists %}
-        <li class="{% if therapist.busy %}disabled{% else %}{% endif %} list-group-item">
-            {% if therapist.busy %}<span class="hidden therapist-busy">rozmawia</span>{% endif %}
-            <span class="name">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</span>
-            / 
-            <span class="specialisation">{{ therapist.specialisation_str }}</span>
-            {% if therapist.phone_number %}
-            / <a class="phone" href="tel:{{ therapist.phone_number }}">{{ therapist.phone_number }}</a>
-                {% if therapist.whatsapp %}
-                / <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp</a>
-                {% endif %}
-            {% endif %}
-            {% if therapist.messenger_id %}
-            / <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger</a>
-            {% endif %}
-            {% if therapist.skype_id %}
-            / <a class="messenger" href="skype:{{ therapist.skype_id }}?call">Skype</a>
-            {% endif %}
-        </li>
+    <table class="table therapists table-hover"> 
+        <tbody>
+            <tr>
+                <td colspan=5><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></td>
+            </tr>
+            {% for therapist in therapists %}
+            <tr{% if therapist.busy %} class="disabled" data-toggle="tooltip" data-placement="bottom"  title="zajęty"{% endif %}>
+                <td class="text-right">
+                    <ul class="nav">
+                        {% if therapist.phone_number %}
+                        <li class="nav-item">
+                            <a class="phone" href="tel:{{ therapist.phone_number }}">telefon&nbsp;</a>
+                        </li>
+                        {% if therapist.whatsapp %}
+                        <li class="nav-item">
+                            <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp&nbsp;</a>
+                        </li>
+                        {% endif %}
+                        {% endif %}
+                        {% if therapist.messenger_id %}
+                        <li class="nav-item">
+                        <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger&nbsp;</a>
+                        </li>
+                        {% endif %}
+                        {% if therapist.skype_id %}
+                        <li class="nav-item">
+                        <a class="messenger" href="skype:{{ therapist.skype_id }}?call">Skype&nbsp;</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </td>
+                <td>
+                {{ therapist.user.first_name }} {{ therapist.user.last_name }}
+                </td>
+                <td class="specialisation">{{ therapist.specialisation_str }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
     <script src="/static/causes/js/therapists.js"></script>
 {% endblock %}

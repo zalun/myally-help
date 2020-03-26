@@ -1,3 +1,9 @@
-.disabled a {
+.therapists .disabled td,
+.therapists .disabled a {
     color: grey;
 }
+.therapists .disabled a {
+    pointer-events: none;
+}
+.therapists .hidden { display: none; }
+.therapists li:hover .hidden { display: block; }
