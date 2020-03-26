@@ -155,3 +155,15 @@ STATIC_URL = "/static/"
 if env.STATIC_ROOT:
     STATIC_ROOT = os.path.join(env.STATIC_ROOT, "static")
     STATICFILES_DIRS = [STATIC_ROOT]
+
+
+ADMINS = env.ADMINS or []
+
+# Emails
+if env.EMAIL_HOST_USER:
+    EMAIL_BACKEND = ‘django.core.mail.backends.smtp.EmailBackend’
+    EMAIL_HOST = env.EMAIL_HOST
+    EMAIL_USE_TLS = env.EMAIL_USE_TLS
+    EMAIL_PORT = env.EMAIL_PORT
+    EMAIL_HOST_USER = env.EMAIL_HOST_USER
+    EMAIL_HOST_PASSWORD = env.EMAIL_HOST_PASSWORD
