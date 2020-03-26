@@ -161,7 +161,7 @@ ADMINS = env.ADMINS or []
 
 # Emails
 if env.EMAIL_HOST_USER:
-    EMAIL_BACKEND = ‘django.core.mail.backends.smtp.EmailBackend’
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_HOST = env.EMAIL_HOST
     EMAIL_USE_TLS = env.EMAIL_USE_TLS
     EMAIL_PORT = env.EMAIL_PORT
