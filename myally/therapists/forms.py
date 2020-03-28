@@ -3,6 +3,7 @@ from crispy_forms.layout import Submit
 from django import forms
 
 class ShortActivityForm(forms.Form):
+    use_custom_control=True
     online = forms.BooleanField(label="Pomagam", required=False, help_text="Zaznaczasz gdy jesteś gotowa/y nieść pomoc.")
     busy = forms.BooleanField(label="Rozmawiam", required=False, help_text="Zaznaczasz gdy rozpoczynasz rozmowę.")
     def __init__(self, *args, **kwargs):
@@ -20,5 +21,7 @@ class ShortTherapistForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.label_class = "custom-switch"
+
         self.helper.form_method = "post"
         self.helper.add_input(Submit("submit", "Zapisz"))
