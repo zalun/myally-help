@@ -15,7 +15,6 @@ class Therapist(models.Model):
     causes = models.ManyToManyField(
         Cause,
         related_name="therapists",
-        null=True,
         blank=True,
     )
     countries = CountryField(multiple=True)

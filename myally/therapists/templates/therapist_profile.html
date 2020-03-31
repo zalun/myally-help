@@ -11,7 +11,7 @@
 <hr class="mt-0 mb-4">
 <div class="row">
     <div class="col-sm">
-        <form method="post">
+        <form method="post" id="form-activity">
             {% csrf_token %}
             <div class="form-group">
                 <div id="div_id_online" class="custom-control custom-switch">
@@ -23,7 +23,6 @@
                     {{ form_activity.busy|as_crispy_field }}
                 </div>
             </div>
-            <button type="submit" name="activity_submit" class="btn btn-primary">Zapisz</button>
         </form>
         {# crispy form_activity #}
     </div>
@@ -33,3 +32,4 @@
     </div>
 </div>
 {% endblock %}
+{% block javascript %}<script src="/static/therapists/js/profile.js"></script>{% endblock %}
