@@ -6,27 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('therapists', '0004_auto_20200322_1638'),
+        ("therapists", "0004_auto_20200322_1638"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='therapist',
-            options={'ordering': ('busy',)},
+            name="therapist", options={"ordering": ("busy",)},
         ),
         migrations.AddField(
-            model_name='therapist',
-            name='psychologist',
+            model_name="therapist",
+            name="psychologist",
             field=models.BooleanField(blank=True, default=False),
         ),
         migrations.AddField(
-            model_name='therapist',
-            name='psychotherapist',
+            model_name="therapist",
+            name="psychotherapist",
             field=models.BooleanField(blank=True, default=True),
         ),
         migrations.AddField(
-            model_name='therapist',
-            name='therapist',
+            model_name="therapist",
+            name="therapist",
             field=models.BooleanField(blank=True, default=False),
         ),
     ]

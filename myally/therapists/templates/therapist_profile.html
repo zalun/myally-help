@@ -5,7 +5,7 @@
 {% block content %}
 <h2 class="mt-2">{{ user.first_name }} {{ user.last_name }}</h2>
 <p>
-    specjalizacja: {{ user.therapist.specialisation }}<br>
+    {{ user.therapist.specialisation_str }}<br>
     aktywne kampanie: {{ causes }}
 </p>
 <hr class="mt-0 mb-4">

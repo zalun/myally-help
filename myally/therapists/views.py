@@ -41,24 +41,25 @@ def index(request):
             t.save()
 
     countries = [c.name for c in request.user.therapist.countries]
-    causes = [c.name for c in request.user.therapist.causes.all()]
-    form_activity = ShortActivityForm(
-        dict(
-            online=t.online,
-            busy=t.busy,
-        )
-    )
+    causes = ", ".join([c.name for c in request.user.therapist.causes.all()])
+    form_activity = ShortActivityForm(dict(online=t.online, busy=t.busy,))
 
     form = ShortTherapistForm(
         dict(
             phone_number=t.phone_number,
             whatsapp=t.whatsapp,
             skype_id=t.skype_id,
-            messenger_id=t.messenger_id
+            messenger_id=t.messenger_id,
         )
     )
     return render(
-        request, 
-        "therapist_profile.html", 
-        context=dict(user=request.user, countries=countries, causes=causes, form=form, form_activity=form_activity),
+        request,
+        "therapist_profile.html",
+        context=dict(
+            user=request.user,
+            countries=countries,
+            causes=causes,
+            form=form,
+            form_activity=form_activity,
+        ),
     )

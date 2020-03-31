@@ -9,24 +9,34 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('causes', '0002_auto_20200322_1620'),
-        ('therapists', '0002_auto_20200319_0741'),
+        ("causes", "0002_auto_20200322_1620"),
+        ("therapists", "0002_auto_20200319_0741"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='therapist',
-            name='active',
+            model_name="therapist",
+            name="active",
             field=models.BooleanField(blank=True, default=True),
         ),
         migrations.AlterField(
-            model_name='therapist',
-            name='causes',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='therapists', to='causes.Cause'),
+            model_name="therapist",
+            name="causes",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="therapists",
+                to="causes.Cause",
+            ),
         ),
         migrations.AlterField(
-            model_name='therapist',
-            name='user',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='therapist', to=settings.AUTH_USER_MODEL),
+            model_name="therapist",
+            name="user",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="therapist",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

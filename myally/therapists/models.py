@@ -8,15 +8,9 @@ from causes.models import Cause
 
 class Therapist(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE,
-        related_name="therapist",
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="therapist",
     )
-    causes = models.ManyToManyField(
-        Cause,
-        related_name="therapists",
-        blank=True,
-    )
+    causes = models.ManyToManyField(Cause, related_name="therapists", blank=True,)
     countries = CountryField(multiple=True)
     psychologist = models.BooleanField(blank=True, default=False)
     psychotherapist = models.BooleanField(blank=True, default=True)
@@ -33,6 +27,7 @@ class Therapist(models.Model):
 
     class Meta:
         ordering = ("busy",)
+
     def __str__(self):
         return "{user} / {specialisation}".format(
             user=str(self.user), specialisation=self.specialisation

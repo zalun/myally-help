@@ -12,16 +12,16 @@ def index(request, cause_name):
     count_available = therapists.filter(busy=False).count()
     count_all = cause.therapists.filter(active=True).count()
     return render(
-        request, 
-        "therapists.html", 
+        request,
+        "therapists.html",
         context=dict(
-            cause=cause, 
+            cause=cause,
             therapists=therapists,
             count_online=count_online,
             count_available=count_available,
             count_all=count_all,
             no_therapists=count_all == 0,
             no_therapists_online=count_online == 0,
-            no_therapists_available=count_available == 0
-        )
+            no_therapists_available=count_available == 0,
+        ),
     )
