@@ -11,14 +11,15 @@ def index(request):
 
     t = request.user.therapist
     if request.method == "POST":
-        if "online" in request.POST:
+        print(request.POST)
+        if "activity_submit" in request.POST:
             form_activity = ShortActivityForm(request.POST)
             if form_activity.is_valid():
                 t.online = form_activity.cleaned_data["online"]
                 t.busy = form_activity.cleaned_data["busy"]
                 t.save()
 
-        if "phone_number" in request.POST:
+        if "therapist_submit" in request.POST:
             form = ShortTherapistForm(request.POST)
             if form.is_valid():
                 t.phone_number = form.cleaned_data["phone_number"]

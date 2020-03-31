@@ -23,12 +23,13 @@
                     {{ form_activity.busy|as_crispy_field }}
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Zapisz</button>
+            <button type="submit" name="activity_submit" class="btn btn-primary">Zapisz</button>
         </form>
         {# crispy form_activity #}
     </div>
     <div class="col-sm">
         {% crispy form %}
+        <button type="submit" name="therapist_submit" class="btn btn-primary">Zapisz</button>
     </div>
 </div>
 {% endblock %}
