@@ -23,23 +23,23 @@
                 <td class="text-right">
                     <ul class="nav">
                         {% if therapist.phone_number %}
-                        <li class="nav-item">
-                            <a class="phone" href="tel:{{ therapist.phone_number }}">telefon&nbsp;</a>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Zadzwoń">
+                            <a class="icon-phone" href="tel:{{ therapist.phone_number }}"><span class="hidden">telefon</span>&nbsp;</a>
                         </li>
                         {% if therapist.whatsapp %}
-                        <li class="nav-item">
-                            <a class="whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">WhatsApp&nbsp;</a>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Whatsapp">
+                            <a class="icon-whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end"><span class="hidden">WhatsApp</span>&nbsp;</a>
                         </li>
                         {% endif %}
                         {% endif %}
                         {% if therapist.messenger_id %}
-                        <li class="nav-item">
-                        <a class="messenger" href="https:m.me/{{ therapist.messenger_id }}">Messenger&nbsp;</a>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Facebook Messenger">
+                            <a class="icon-messenger" href="https:m.me/{{ therapist.messenger_id }}"><span class="hidden">Messenger</span>&nbsp;</a>
                         </li>
                         {% endif %}
                         {% if therapist.skype_id %}
-                        <li class="nav-item">
-                        <a class="messenger" href="skype:{{ therapist.skype_id }}?call">Skype&nbsp;</a>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Skype">
+                            <a class="icon-skype" href="skype:{{ therapist.skype_id }}?call"><span class="hidden">Skype</span>&nbsp;</a>
                         </li>
                         {% endif %}
                     </ul>

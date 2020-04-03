@@ -6,4 +6,4 @@
     pointer-events: none;
 }
 .therapists .hidden { display: none; }
-.therapists li:hover .hidden { display: block; }
+.therapists .nav :hover { text-decoration: none; }
