@@ -59,5 +59,11 @@ body {
 }
 .icon-phone:before {
   content: "\e942";
-  color: green;
+}
+.disabled .icon-messenger:before,
+.disabled .icon-skype:before,
+.disabled .icon-whatsapp:before,
+.disabled .icon-zoom:before,
+.disabled .icon-phone:before {
+  color: grey;
 }
