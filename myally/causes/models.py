@@ -4,6 +4,7 @@ from django_countries.fields import CountryField
 
 class Cause(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField()
     description = models.TextField()
     countries = CountryField(multiple=True)
     website = models.URLField(blank=True, null=True)

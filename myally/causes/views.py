@@ -5,8 +5,8 @@ from .models import Cause
 from therapists.models import Therapist
 
 
-def index(request, cause_name):
-    cause = get_object_or_404(Cause, name=cause_name)
+def therapists(request, cause_name):
+    cause = get_object_or_404(Cause, slug=cause_name)
     therapists = cause.therapists.filter(active=True, online=True)
     count_online = therapists.count()
     count_available = therapists.filter(busy=False).count()
@@ -23,5 +23,20 @@ def index(request, cause_name):
             no_therapists=count_all == 0,
             no_therapists_online=count_online == 0,
             no_therapists_available=count_available == 0,
+        ),
+    )
+
+def coordinators(request, cause_name):
+    if not request.user.is_superuser:
+        return HttpResponse("ACCESS DENIED")
+
+    cause = get_object_or_404(Cause, slug=cause_name)
+    coordinators = cause.coordinators.filter()
+    return render(
+        request,
+        "coordinators.html",
+        context=dict(
+            cause=cause,
+            coordinators=coordinators,
         ),
     )

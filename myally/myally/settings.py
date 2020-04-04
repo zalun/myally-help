@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # MyAlly apps
     "causes",
     "therapists",
+    "coordinators",
     # Third party
     "crispy_forms",
     "allauth",
