@@ -7,4 +7,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         e.stopPropagation();
         e.preventDefault();
     });
+    $("#invite_therapist_form .btn").click(function(e) {
+        alert("YEAH");
+        $("#invite_therapist_form").submit();
+    });
 })

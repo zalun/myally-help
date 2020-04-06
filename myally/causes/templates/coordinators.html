@@ -1,0 +1,32 @@
+{% extends "generic.html" %}
+{% load social_links %}
+{% block title %}Coordinators - {{ cause.name|title }}{% endblock %}
+{% block head %} <link rel="stylesheet" href="/static/causes/css/therapists.css">{% endblock %}
+{% block header_title %}Coordinators - {{ cause.name }}{% endblock %}
+{% block content %}
+    <table class="table coordinators table-hover"> 
+        <tbody>
+            <tr>
+                <td colspan=5><button class="btn btn-block btn-primary" id="invite_button">Invite</button></td>
+            </tr>
+            <tr>
+                <td colspan=5><button class="btn btn-light btn-block" id="reload_button">Reload</button></td>
+            </tr>
+            {% for coordinator in coordinators %}
+            <tr>
+                <td class="text-right">
+                    <ul class="nav">
+                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Usuń">
+                            <a href="/{{ cause.slug }}/delete/{{ coordinator.pk }}">Usuń&nbsp;</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                {{ coordinator.user.first_name }} {{ coordinator.user.last_name }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block javascript %}<script src="/static/causes/js/therapists.js"></script>{% endblock %}

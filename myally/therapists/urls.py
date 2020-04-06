@@ -10,4 +10,7 @@ urlpatterns = [
         login_required(views.save_status),
         name="therapist_status_save",
     ),
+    path(
+        "invite/<str:cause_name>/<str:country>", views.invite, name="invite_therapist"
+    ),
 ]

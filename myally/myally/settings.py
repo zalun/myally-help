@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     #'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.google',
+    "invitations",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -59,11 +60,17 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 SITE_ID = 1
 
 # All Auth
-ACCOUNT_ADAPTER = "myally.account_adapter.NoNewUsersAccountAdapter"
+# ACCOUNT_ADAPTER = "myally.account_adapter.NoNewUsersAccountAdapter"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 LOGIN_REDIRECT_URL = "/therapist/profile"
 SOCIALACCOUNT_AUTO_SIGNUP = False
+
+# Invitations
+ACCOUNT_ADAPTER = "invitations.models.InvitationsAdapter"
+INVITATIONS_INVITATION_EXPIRY = 7
+INVITATIONS_INVITATION_ONLY = True
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

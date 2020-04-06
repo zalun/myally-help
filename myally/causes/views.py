@@ -1,8 +1,11 @@
 from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
+from invitations.utils import get_invitation_model
 
 from .models import Cause
 from therapists.models import Therapist
+from coordinators.forms import InviteCoordinatorForm
 
 
 def therapists(request, cause_name):
@@ -11,12 +14,16 @@ def therapists(request, cause_name):
     count_online = therapists.count()
     count_available = therapists.filter(busy=False).count()
     count_all = cause.therapists.filter(active=True).count()
+    invite_coordinator_form = InviteCoordinatorForm()
     return render(
         request,
         "therapists.html",
         context=dict(
             cause=cause,
+            cause_name=cause.slug,
+            country="pl",
             therapists=therapists,
+            invite_coordinator_form=invite_coordinator_form,
             count_online=count_online,
             count_available=count_available,
             count_all=count_all,
@@ -25,6 +32,7 @@ def therapists(request, cause_name):
             no_therapists_available=count_available == 0,
         ),
     )
+
 
 def coordinators(request, cause_name):
     if not request.user.is_superuser:
@@ -35,8 +43,5 @@ def coordinators(request, cause_name):
     return render(
         request,
         "coordinators.html",
-        context=dict(
-            cause=cause,
-            coordinators=coordinators,
-        ),
+        context=dict(cause=cause, coordinators=coordinators,),
     )

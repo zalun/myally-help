@@ -37,3 +37,7 @@ class ShortTherapistForm(forms.Form):
 
         self.helper.form_method = "post"
         self.helper.add_input(Submit("submit", "Zapisz"))
+
+
+class InviteTherapistForm(forms.Form):
+    email = forms.EmailField()

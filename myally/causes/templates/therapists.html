@@ -1,5 +1,6 @@
 {% extends "generic.html" %}
 {% load social_links %}
+{% load crispy_forms_tags %}
 {% block title %}bezpłatna pomoc psychologiczna - {{ cause.name|title }}{% endblock %}
 {% block head %} <link rel="stylesheet" href="/static/causes/css/therapists.css">{% endblock %}
 {% block header_title %}Pomoc - {{ cause.name }}{% endblock %}
@@ -13,44 +14,70 @@
 {% elif no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>
 {% elif no_therapists_available %}<p>Niedługo ktoś zakończy rozmowę. Odświeżaj stronę co kilka minut.<p>
 {% endif %}
-    <table class="table therapists table-hover"> 
-        <tbody>
-            <tr>
-                <td colspan=5><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></td>
-            </tr>
-            {% for therapist in therapists %}
-            <tr{% if therapist.busy %} class="disabled" data-toggle="tooltip" data-placement="bottom"  title="rozmawia"{% endif %}>
-                <td class="text-right">
-                    <ul class="nav">
-                        {% if therapist.phone_number %}
-                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Zadzwoń">
-                            <a class="icon-phone" href="tel:{{ therapist.phone_number }}"><span class="hidden">telefon</span>&nbsp;</a>
-                        </li>
-                        {% if therapist.whatsapp %}
-                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Whatsapp">
-                            <a class="icon-whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end"><span class="hidden">WhatsApp</span>&nbsp;</a>
-                        </li>
-                        {% endif %}
-                        {% endif %}
-                        {% if therapist.messenger_id %}
-                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Facebook Messenger">
-                            <a class="icon-messenger" href="https:m.me/{{ therapist.messenger_id }}"><span class="hidden">Messenger</span>&nbsp;</a>
-                        </li>
-                        {% endif %}
-                        {% if therapist.skype_id %}
-                        <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Skype">
-                            <a class="icon-skype" href="skype:{{ therapist.skype_id }}?call"><span class="hidden">Skype</span>&nbsp;</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </td>
-                <td>
-                {{ therapist.user.first_name }} {{ therapist.user.last_name }}
-                </td>
-                <td class="specialisation">{{ therapist.specialisation_str }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% if request.user.is_superuser %}{# TODO Use permissions instead of roles #}
+<form  action="{% url "invite_coordinator" cause_name=cause.slug country="pl"  %} class="form-horizontal" method="post" > 
+   {% csrf_token %}
+   <div class="form-group row" >
+       <div class="">
+           <div class="input-group">
+               <input type="email" name="email" class="emailinput form-control form-control" placeholder="Email" required id="id_email">
+               <span class="input-group-append"><button  class="btn btn-primary" type="button">Invite Coordinator</button></span>
+           </div>
+       </div>
+   </div>
+</form>
+{% endif %}
+{% if request.user.therapist %}{# TODO Use permissions instead of roles #}
+<form  action="{% url "invite_therapist" cause_name=cause.slug country="pl"  %} class="form-horizontal" method="post" id="invite_therapist_form"> 
+   {% csrf_token %}
+   <div class="form-group row" >
+       <div class="">
+           <div class="input-group">
+               <input type="email" name="email" class="emailinput form-control form-control" placeholder="Email" required id="id_email">
+               <span class="input-group-append"><button class="btn btn-primary" type="button">Invite Therapist</button></span>
+           </div>
+       </div>
+   </div>
+</form>
+{% endif %}
+<table class="table therapists table-hover"> 
+    <tbody>
+        <tr>
+            <td colspan=5><button class="btn btn-light btn-block" id="reload_button">Odśwież</button></td>
+        </tr>
+        {% for therapist in therapists %}
+        <tr{% if therapist.busy %} class="disabled" data-toggle="tooltip" data-placement="bottom"  title="rozmawia"{% endif %}>
+            <td class="text-right">
+                <ul class="nav">
+                    {% if therapist.phone_number %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Zadzwoń">
+                        <a class="icon-phone" href="tel:{{ therapist.phone_number }}"><span class="hidden">telefon</span>&nbsp;</a>
+                    </li>
+                    {% if therapist.whatsapp %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Whatsapp">
+                        <a class="icon-whatsapp" href="intent://send/{{ therapist.phone_number|whatsapp }}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end"><span class="hidden">WhatsApp</span>&nbsp;</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    {% if therapist.messenger_id %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Facebook Messenger">
+                        <a class="icon-messenger" href="https:m.me/{{ therapist.messenger_id }}"><span class="hidden">Messenger</span>&nbsp;</a>
+                    </li>
+                    {% endif %}
+                    {% if therapist.skype_id %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="top" title="Skype">
+                        <a class="icon-skype" href="skype:{{ therapist.skype_id }}?call"><span class="hidden">Skype</span>&nbsp;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </td>
+            <td>
+            {{ therapist.user.first_name }} {{ therapist.user.last_name }}
+            </td>
+            <td class="specialisation">{{ therapist.specialisation_str }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
 {% block javascript %}<script src="/static/causes/js/therapists.js"></script>{% endblock %}
