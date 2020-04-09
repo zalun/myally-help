@@ -14,6 +14,7 @@
 {% elif no_therapists_online %}<p>Przykro nam. Żaden z terapeutów nie jest w tej chwili aktywny. Spróbuj za godzinę.</p>
 {% elif no_therapists_available %}<p>Niedługo ktoś zakończy rozmowę. Odświeżaj stronę co kilka minut.<p>
 {% endif %}
+{% comment %}
 {% if request.user.is_superuser %}{# TODO Use permissions instead of roles #}
 <form  action="{% url "invite_coordinator" cause_name=cause.slug country="pl"  %} class="form-horizontal" method="post" > 
    {% csrf_token %}
@@ -27,6 +28,7 @@
    </div>
 </form>
 {% endif %}
+{% endcomment %}
 {% if request.user.therapist %}{# TODO Use permissions instead of roles #}
 <form  action="{% url "invite_therapist" cause_name=cause.slug country="pl"  %} class="form-horizontal" method="post" id="invite_therapist_form"> 
    {% csrf_token %}
