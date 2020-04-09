@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_http_methods
@@ -73,7 +74,11 @@ def invite(request, cause_name, country):
     if not request.user.is_superuser and not request.user.coordinator:
         return JsonResponse(dict(success=False, errors=dict(form=["Access Denied"])))
 
-    invite_form = InviteTherapistForm(request.POST)
+    try:
+        invite_form = InviteTherapistForm(request.POST)
+    except IntegrityError:
+        return JsonResponse(dict(success=False, errors=dict(form=["User already invited."])))
+
     if not invite_form.is_valid():
         return JsonResponse(dict(success=False, errors=invite_forms.errors))
 
