@@ -74,16 +74,16 @@ def invite(request, cause_name, country):
     if not request.user.is_superuser and not request.user.coordinator:
         return JsonResponse(dict(success=False, errors=dict(form=["Access Denied"])))
 
-    try:
-        invite_form = InviteTherapistForm(request.POST)
-    except IntegrityError:
-        return JsonResponse(dict(success=False, errors=dict(form=["User already invited."])))
-
+    invite_form = InviteTherapistForm(request.POST)
     if not invite_form.is_valid():
         return JsonResponse(dict(success=False, errors=invite_forms.errors))
 
     cause = get_object_or_404(Cause, slug=cause_name)
     Invitation = get_invitation_model()
+        try:
     invite = Invitation.create(request.POST["email"], inviter=request.user)
+    except IntegrityError:
+        return JsonResponse(dict(success=False, errors=dict(form=["User already invited."])))
+
     invite.send_invitation(request)
     return JsonResponse(dict(success=True))
