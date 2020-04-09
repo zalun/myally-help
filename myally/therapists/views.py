@@ -80,8 +80,8 @@ def invite(request, cause_name, country):
 
     cause = get_object_or_404(Cause, slug=cause_name)
     Invitation = get_invitation_model()
-        try:
-    invite = Invitation.create(request.POST["email"], inviter=request.user)
+    try:
+        invite = Invitation.create(request.POST["email"], inviter=request.user)
     except IntegrityError:
         return JsonResponse(dict(success=False, errors=dict(form=["User already invited."])))
 
