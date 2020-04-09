@@ -70,7 +70,7 @@ def index(request):
 @login_required
 @require_http_methods(["POST"])
 def invite(request, cause_name, country):
-    if not request.user.coordinator or not request.user.is_superuser:
+    if not request.user.is_superuser and not request.user.coordinator:
         return JsonResponse(dict(success=False, errors=dict(form=["Access Denied"])))
 
     invite_form = InviteTherapistForm(request.POST)
